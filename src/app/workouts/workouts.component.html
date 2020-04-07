@@ -1,0 +1,17 @@
+<app-workout-detail [workout]="selectedWorkout"></app-workout-detail>
+<h3>Workouts</h3>
+<div *ngFor="let workout of workouts"
+    [class.selected]="workout === selectedWorkout"
+    (click)="onSelect(workout)">
+<p>{{ workout.name | uppercase }}</p>
+<button (click)="delete(workout)">delete</button>
+</div>
+<label> Workout name:
+    <input #workoutName />
+</label>
+<label> Workout Type:
+    <input #workoutType />
+</label>
+<button (click)="add(workoutName.value,workoutType.value);workoutName.value='';workoutType.value=''">
+add
+</button>

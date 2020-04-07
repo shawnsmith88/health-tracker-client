@@ -1,0 +1,6 @@
+<div *ngIf="workout">
+<label> Workout selected:
+    <input [(ngModel)]="workout.name" placeholder="unnamed">
+    <button (click)="save()">save</button>
+</label>
+<p>{{ workout.type }}</p>
