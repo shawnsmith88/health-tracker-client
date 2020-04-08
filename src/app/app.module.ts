@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { WorkoutsComponent } from './workouts/workouts.component';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
 import { HttpClientModule }    from '@angular/common/http';
+import { WorkoutTypeDropdownComponent } from './workout-type-dropdown/workout-type-dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkoutsComponent,
-    WorkoutDetailComponent
+    WorkoutDetailComponent,
+    WorkoutTypeDropdownComponent
   ],
   imports: [
     BrowserModule,

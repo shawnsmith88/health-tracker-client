@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Workout } from '../workout';
 import { WorkoutService } from '../workout.service';
+import { WorkoutTypeService } from '../workout-type.service';
+import { WorkoutType } from '../workout-type';
 
 @Component({
   selector: 'app-workouts',
@@ -9,6 +11,8 @@ import { WorkoutService } from '../workout.service';
 })
 export class WorkoutsComponent implements OnInit {
   workouts: Workout[];
+  types:WorkoutType[];
+  newTypes:WorkoutType[];
   selectedWorkout: Workout;
   onSelect(workout: Workout): void {
     this.selectedWorkout = workout;
@@ -21,7 +25,17 @@ export class WorkoutsComponent implements OnInit {
   add(name:string,type:string):void {
     name=name.trim();
     type=type.trim();
+    console.log(this.newTypes);
     if (!name) {return;}
+    this.workoutTypeService.getTypes().subscribe(response => {
+      this.types=response;
+      if(this.types.filter(e => e.type == type).length==0){
+        this.workoutTypeService.addType({type} as WorkoutType).subscribe(newType => {
+          this.newTypes.push(newType)
+          console.log(this.newTypes)
+        });
+      }
+    });
     this.workoutService.addWorkout( {name,type } as Workout)
       .subscribe( workout => this.workouts.push(workout) );
   }
@@ -30,10 +44,14 @@ export class WorkoutsComponent implements OnInit {
       this.workouts=workouts;
     });
   }
-  constructor(private workoutService: WorkoutService) { }
+  constructor(
+    private workoutService: WorkoutService,
+    private workoutTypeService:WorkoutTypeService
+    ) { }
 
   ngOnInit(): void {
     this.getWorkouts();
+    this.newTypes=[];
   }
 
 }
