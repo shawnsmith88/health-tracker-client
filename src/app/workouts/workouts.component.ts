@@ -14,8 +14,10 @@ export class WorkoutsComponent implements OnInit {
   types:WorkoutType[];
   newTypes:WorkoutType[];
   selectedWorkout: Workout;
+  display:string;
   onSelect(workout: Workout): void {
     this.selectedWorkout = workout;
+    this.openmodal();
   }
   delete(workout:Workout): void {
     this.workouts=this.workouts.filter(w=>w!=workout);
@@ -44,10 +46,18 @@ export class WorkoutsComponent implements OnInit {
       this.workouts=workouts;
     });
   }
+  openmodal() {
+    this.display='block';
+  }
+  closemodal() {
+    this.display='none';
+  }
   constructor(
     private workoutService: WorkoutService,
-    private workoutTypeService:WorkoutTypeService
-    ) { }
+    private workoutTypeService:WorkoutTypeService,
+    ) {
+      this.display='none';
+     }
 
   ngOnInit(): void {
     this.getWorkouts();

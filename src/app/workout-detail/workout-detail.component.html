@@ -1,7 +1,9 @@
 <div *ngIf="workout" class="container-sm">
 <label> Workout selected:
     <input [(ngModel)]="workout.name" placeholder="unnamed">
-    <button (click)="save()">save</button>
 </label>
-<p>{{ workout.type }}</p>
+<label>type:
+    <input [(ngModel)]="workout.type" placeholder="no type">
+</label>
+<button (click)="save()">save</button>
 </div>
